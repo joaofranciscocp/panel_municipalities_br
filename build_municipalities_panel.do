@@ -119,3 +119,245 @@ duplicates drop
 
 save "output\municipalities_2007.dta"
 
+
+// 2008
+
+import excel "raw\dtb_2008.xls", firstrow clear
+
+ren UF uf_code
+ren Município munic_code_end
+ren Nome_Município munic_name
+
+gen munic_code = uf_code + munic_code_end
+
+keep uf_code munic_code munic_name
+
+duplicates drop
+
+save "output\municipalities_2008.dta"
+
+
+// 2009
+
+import excel "raw\dtb_2009.xls", firstrow clear
+
+ren UF uf_code
+ren Município munic_code
+ren Município_Nome munic_name
+
+keep uf_code munic_code munic_name
+
+duplicates drop
+
+save "output\municipalities_2009.dta"
+
+
+// 2010
+
+import excel "raw\dtb_2010.xls", firstrow clear
+
+ren UF uf_code
+ren Município munic_code
+ren Nome_Munic munic_name
+
+keep uf_code munic_code munic_name
+
+duplicates drop
+
+save "output\municipalities_2010.dta"
+
+
+// 2011
+
+import excel "raw\dtb_2011.xls", firstrow clear
+
+ren UF uf_code
+ren Munic munic_code_end
+ren Nome_Munic munic_name
+
+gen munic_code = uf_code + munic_code_end
+
+keep uf_code munic_code munic_name
+
+duplicates drop
+
+save "output\municipalities_2011.dta"
+
+
+// 2012
+
+import excel "raw\dtb_2012.xls", firstrow clear
+
+ren UF uf_code
+ren Munic munic_code_end
+ren Nome_Munic munic_name
+
+gen munic_code = uf_code + munic_code_end
+
+keep uf_code munic_code munic_name
+
+duplicates drop
+
+save "output\municipalities_2012.dta"
+
+
+// 2013
+
+import excel "raw\dtb_2013.xls", firstrow clear
+
+ren Uf uf_code
+ren Município munic_code_end
+ren Nome_Município munic_name
+
+gen munic_code = uf_code + munic_code_end
+
+keep uf_code munic_code munic_name
+
+duplicates drop
+
+save "output\municipalities_2013.dta"
+
+
+// 2014
+
+import excel "raw\dtb_2014.xls", firstrow clear
+
+ren UF uf_code
+ren CodMunicipioCompleto munic_code
+ren Nome_Município munic_name
+
+keep uf_code munic_code munic_name
+
+duplicates drop
+
+save "output\municipalities_2014.dta"
+
+
+// 2015
+
+import excel "raw\dtb_2015.xls", firstrow clear
+
+ren UF uf_code
+ren CódigoMunicípioCompleto munic_code
+ren Nome_Município munic_name
+
+keep uf_code munic_code munic_name
+
+duplicates drop
+
+save "output\municipalities_2015.dta"
+
+
+// 2016
+
+import excel "raw\dtb_2016.xls", firstrow clear
+
+ren UF uf_code
+ren CódigoMunicípioCompleto munic_code
+ren Nome_Município munic_name
+
+keep uf_code munic_code munic_name
+
+duplicates drop
+
+save "output\municipalities_2016.dta"
+
+
+// 2017
+
+import excel "raw\dtb_2017.xls", firstrow clear
+
+ren UF uf_code
+ren CódigoMunicípioCompleto munic_code
+ren Nome_Município munic_name
+
+keep uf_code munic_code munic_name
+
+duplicates drop
+
+save "output\municipalities_2017.dta"
+
+
+// 2018
+
+import excel "raw\dtb_2018.xls", firstrow clear
+
+ren UF uf_code
+ren CódigoMunicípioCompleto munic_code
+ren Nome_Município munic_name
+
+keep uf_code munic_code munic_name
+
+duplicates drop
+
+save "output\municipalities_2018.dta"
+
+
+// 2019
+
+import excel "raw\dtb_2019.xls", firstrow clear
+
+ren UF uf_code
+ren CódigoMunicípioCompleto munic_code
+ren Nome_Município munic_name
+
+keep uf_code munic_code munic_name
+
+duplicates drop
+
+save "output\municipalities_2019.dta"
+
+
+// 2020
+
+import excel "raw\dtb_2020.xls", firstrow clear
+
+ren UF uf_code
+ren CódigoMunicípioCompleto munic_code
+ren Nome_Município munic_name
+
+keep uf_code munic_code munic_name
+
+duplicates drop
+
+save "output\municipalities_2020.dta"
+
+
+// 2021
+
+import excel "raw\dtb_2021.xls", firstrow clear
+
+ren UF uf_code
+ren CódigoMunicípioCompleto munic_code
+ren Nome_Município munic_name
+
+keep uf_code munic_code munic_name
+
+duplicates drop
+
+save "output\municipalities_2021.dta"
+
+
+// 2022
+
+import excel "raw\dtb_2022.xls", firstrow clear
+
+ren UF uf_code
+ren CódigoMunicípioCompleto munic_code
+ren Nome_Município munic_name
+
+keep uf_code munic_code munic_name
+
+duplicates drop
+
+save "output\municipalities_2022.dta"
+
+
+
+
+
+
+
+
+
+
