@@ -25,13 +25,14 @@ global out			"$dropbox/brazil_education/04_out"
 *global data "C:\Users\joao.perez\Downloads\brazil_education\01_data"
 
 cd "C:\Users\joaofrancisco\Desktop\USP\Economia\FUNDEF project\Municipalities\panel_municipalities_br"
+
 *-------------------------------------------------------------------------------
 * IMPORT DATA
 *-------------------------------------------------------------------------------
 
-// 2000
+// 1997
 
-import excel "raw\dtb_2000.xls", firstrow clear
+import excel "raw\dtb_2000.xls", firstrow clear // the filename says 2000, but it's the list for 1997
 
 keep if Nível == "5"
 
@@ -49,11 +50,11 @@ replace munic_code = uf_code + "0" + munic_code_end if strlen(munic_code_end) ==
 replace munic_code = uf_code + "00" + munic_code_end if strlen(munic_code_end) == 3
 replace munic_code = uf_code + "000" + munic_code_end if strlen(munic_code_end) == 2
 
-gen d_2000 = 1
+gen d_1997 = 1
 
-keep uf_code munic_code munic_name d_2000
+keep uf_code munic_code munic_name d_1997
 
-save "output\municipalities_2000.dta", replace
+save "output\municipalities_1997.dta", replace
 
 
 // 2003
@@ -385,9 +386,37 @@ duplicates drop
 
 save "output\municipalities_2022.dta", replace
 
+*-------------------------------------------------------------------------------
+* BUILD PANEL
+*-------------------------------------------------------------------------------
+
+use "output\municipalities_1997.dta", clear
 
 
+foreach year in 2003 2004 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 {
+    merge m:m munic_code using "output\municipalities_`year'.dta"
+	
+	drop _merge
+}
 
+duplicates drop
+
+
+//If a municipality did not exist in year t,
+//find to which other municipality it belonged
+
+foreach year in 1997 2003 2004 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 {
+	gen previous_mun_`year' = ""
+	
+	replace previous_mun_`year' = munic_code if d_`year' != .
+	
+}
+
+***********
+*TO DO: manually find such municipalities zzzz
+***********
+
+save "output\municipalities_panel.dta", replace
 
 
 
