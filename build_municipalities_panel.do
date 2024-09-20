@@ -49,9 +49,11 @@ replace munic_code = uf_code + "0" + munic_code_end if strlen(munic_code_end) ==
 replace munic_code = uf_code + "00" + munic_code_end if strlen(munic_code_end) == 3
 replace munic_code = uf_code + "000" + munic_code_end if strlen(munic_code_end) == 2
 
-keep uf_code munic_code munic_name
+gen d_2000 = 1
 
-save "output\municipalities_2000.dta"
+keep uf_code munic_code munic_name d_2000
+
+save "output\municipalities_2000.dta", replace
 
 
 // 2003
@@ -65,10 +67,11 @@ ren UF uf_code
 ren MUNICÍPIO munic_code_end
 
 gen munic_code = uf_code + munic_code_end
+gen d_2003 = 1
 
-keep uf_code munic_code munic_name
+keep uf_code munic_code munic_name d_2003
 
-save "output\municipalities_2003.dta"
+save "output\municipalities_2003.dta", replace
 
 
 // 2004
@@ -82,10 +85,11 @@ ren UF uf_code
 ren MUNICÍPIO munic_code_end
 
 gen munic_code = uf_code + munic_code_end
+gen d_2004 = 1
 
-keep uf_code munic_code munic_name
+keep uf_code munic_code munic_name d_2004
 
-save "output\municipalities_2004.dta"
+save "output\municipalities_2004.dta", replace
 
 
 // 2006 
@@ -96,11 +100,13 @@ ren UF uf_code
 ren Munic munic_code
 ren NomeMunic munic_name
 
-keep uf_code munic_code munic_name
+gen d_2006 = 1
+
+keep uf_code munic_code munic_name d_2006
 
 duplicates drop
 
-save "output\municipalities_2006.dta"
+save "output\municipalities_2006.dta", replace
 
 
 // 2007 
@@ -112,12 +118,13 @@ ren Município munic_code_end
 ren Nome_Município munic_name
 
 gen munic_code = uf_code + munic_code_end
+gen d_2007 = 1
 
-keep uf_code munic_code munic_name
+keep uf_code munic_code munic_name d_2007
 
 duplicates drop
 
-save "output\municipalities_2007.dta"
+save "output\municipalities_2007.dta", replace
 
 
 // 2008
@@ -129,12 +136,13 @@ ren Município munic_code_end
 ren Nome_Município munic_name
 
 gen munic_code = uf_code + munic_code_end
+gen d_2008 = 1
 
-keep uf_code munic_code munic_name
+keep uf_code munic_code munic_name d_2008
 
 duplicates drop
 
-save "output\municipalities_2008.dta"
+save "output\municipalities_2008.dta", replace
 
 
 // 2009
@@ -145,11 +153,13 @@ ren UF uf_code
 ren Município munic_code
 ren Município_Nome munic_name
 
-keep uf_code munic_code munic_name
+gen d_2009 = 1
+
+keep uf_code munic_code munic_name d_2009
 
 duplicates drop
 
-save "output\municipalities_2009.dta"
+save "output\municipalities_2009.dta", replace
 
 
 // 2010
@@ -160,11 +170,13 @@ ren UF uf_code
 ren Município munic_code
 ren Nome_Munic munic_name
 
-keep uf_code munic_code munic_name
+gen d_2010 = 1
+
+keep uf_code munic_code munic_name d_2010
 
 duplicates drop
 
-save "output\municipalities_2010.dta"
+save "output\municipalities_2010.dta", replace
 
 
 // 2011
@@ -176,12 +188,13 @@ ren Munic munic_code_end
 ren Nome_Munic munic_name
 
 gen munic_code = uf_code + munic_code_end
+gen d_2011 = 1
 
-keep uf_code munic_code munic_name
+keep uf_code munic_code munic_name d_2011
 
 duplicates drop
 
-save "output\municipalities_2011.dta"
+save "output\municipalities_2011.dta", replace
 
 
 // 2012
@@ -193,12 +206,13 @@ ren Munic munic_code_end
 ren Nome_Munic munic_name
 
 gen munic_code = uf_code + munic_code_end
+gen d_2012 = 1
 
-keep uf_code munic_code munic_name
+keep uf_code munic_code munic_name d_2012
 
 duplicates drop
 
-save "output\municipalities_2012.dta"
+save "output\municipalities_2012.dta", replace
 
 
 // 2013
@@ -210,12 +224,13 @@ ren Município munic_code_end
 ren Nome_Município munic_name
 
 gen munic_code = uf_code + munic_code_end
+gen d_2013 = 1
 
-keep uf_code munic_code munic_name
+keep uf_code munic_code munic_name d_2013
 
 duplicates drop
 
-save "output\municipalities_2013.dta"
+save "output\municipalities_2013.dta", replace
 
 
 // 2014
@@ -226,11 +241,13 @@ ren UF uf_code
 ren CodMunicipioCompleto munic_code
 ren Nome_Município munic_name
 
-keep uf_code munic_code munic_name
+gen d_2014 = 1
+
+keep uf_code munic_code munic_name d_2014
 
 duplicates drop
 
-save "output\municipalities_2014.dta"
+save "output\municipalities_2014.dta", replace
 
 
 // 2015
@@ -241,11 +258,13 @@ ren UF uf_code
 ren CódigoMunicípioCompleto munic_code
 ren Nome_Município munic_name
 
-keep uf_code munic_code munic_name
+gen d_2015 = 1
+
+keep uf_code munic_code munic_name d_2015
 
 duplicates drop
 
-save "output\municipalities_2015.dta"
+save "output\municipalities_2015.dta", replace
 
 
 // 2016
@@ -256,11 +275,13 @@ ren UF uf_code
 ren CódigoMunicípioCompleto munic_code
 ren Nome_Município munic_name
 
-keep uf_code munic_code munic_name
+gen d_2016 = 1
+
+keep uf_code munic_code munic_name d_2016
 
 duplicates drop
 
-save "output\municipalities_2016.dta"
+save "output\municipalities_2016.dta", replace
 
 
 // 2017
@@ -271,11 +292,13 @@ ren UF uf_code
 ren CódigoMunicípioCompleto munic_code
 ren Nome_Município munic_name
 
-keep uf_code munic_code munic_name
+gen d_2017 = 1
+
+keep uf_code munic_code munic_name d_2017
 
 duplicates drop
 
-save "output\municipalities_2017.dta"
+save "output\municipalities_2017.dta", replace
 
 
 // 2018
@@ -286,11 +309,13 @@ ren UF uf_code
 ren CódigoMunicípioCompleto munic_code
 ren Nome_Município munic_name
 
-keep uf_code munic_code munic_name
+gen d_2018 = 1
+
+keep uf_code munic_code munic_name d_2018
 
 duplicates drop
 
-save "output\municipalities_2018.dta"
+save "output\municipalities_2018.dta", replace
 
 
 // 2019
@@ -301,11 +326,13 @@ ren UF uf_code
 ren CódigoMunicípioCompleto munic_code
 ren Nome_Município munic_name
 
-keep uf_code munic_code munic_name
+gen d_2019 = 1
+
+keep uf_code munic_code munic_name d_2019
 
 duplicates drop
 
-save "output\municipalities_2019.dta"
+save "output\municipalities_2019.dta", replace
 
 
 // 2020
@@ -316,11 +343,13 @@ ren UF uf_code
 ren CódigoMunicípioCompleto munic_code
 ren Nome_Município munic_name
 
-keep uf_code munic_code munic_name
+gen d_2020 = 1
+
+keep uf_code munic_code munic_name d_2020
 
 duplicates drop
 
-save "output\municipalities_2020.dta"
+save "output\municipalities_2020.dta", replace
 
 
 // 2021
@@ -331,11 +360,13 @@ ren UF uf_code
 ren CódigoMunicípioCompleto munic_code
 ren Nome_Município munic_name
 
-keep uf_code munic_code munic_name
+gen d_2021 = 1
+
+keep uf_code munic_code munic_name d_2021
 
 duplicates drop
 
-save "output\municipalities_2021.dta"
+save "output\municipalities_2021.dta", replace
 
 
 // 2022
@@ -346,11 +377,15 @@ ren UF uf_code
 ren CódigoMunicípioCompleto munic_code
 ren Nome_Município munic_name
 
-keep uf_code munic_code munic_name
+gen d_2022 = 1
+
+keep uf_code munic_code munic_name d_2022
 
 duplicates drop
 
-save "output\municipalities_2022.dta"
+save "output\municipalities_2022.dta", replace
+
+
 
 
 
