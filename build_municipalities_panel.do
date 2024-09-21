@@ -401,6 +401,9 @@ foreach year in 2003 2004 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016
 
 duplicates drop
 
+gen d_2005 = 1 if d_2004 == 1
+order d_2005, after(d_2004)
+order munic_code, after(uf_code)
 
 //If a municipality did not exist in year t,
 //find to which other municipality it belonged
@@ -412,9 +415,76 @@ foreach year in 1997 2003 2004 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015
 	
 }
 
-***********
+*******************************************************
 *TO DO: manually find such municipalities zzzz
-***********
+*******************************************************
+
+
+// 1504752	Mojuí dos Campos : Santarém 
+// 2200954	Aroeiras do Itaim : Picos
+// 2206720	Nazária : Teresina 
+// 2207793	Pau D'Arco do Piauí : Altos
+// 2406155	Jundiá : Várzea
+// 2703759	Jequiá da Praia : São Miguel dos Campos e Coruripe
+// 2903276	Barrocas : Serrinha
+// 2919553	Luís Eduardo Magalhães : Barreiras
+// 3202256	Governador Lindenberg : Colatina 
+// 3302858	Mesquita : Nova Iguaçu
+// 4212650	Pescaria Brava : Laguna
+// 4220000	Balneário Rincão : Içara
+// 4300034	Aceguá : Bagé 
+// 4300471	Almirante Tamandaré do Sul : Carazinho 
+// 4301073	Arroio do Padre : Pelotas
+// 4302220	Boa Vista do Cadeado : Cruz Alta, Ijuí e Augusto Pestana
+// 4302238	Boa Vista do Incra : Cruz Alta
+// 4302584	Bozano : Ijuí 
+// 4304614	Canudos do Vale : Lajeado
+// 4304622	Capão Bonito do Sul : Lagoa Vermelha
+// 4304655	Capão do Cipó : Santiago
+// 4305835	Coqueiro Baixo : Nova Bréscia e Relvado
+// 4305934	Coronel Pilar : Garibaldi 
+// 4306130	Cruzaltense : Campinas do Sul
+// 4308433	Forquetinha : Lajeado
+// 4310652	Itati : Terra de Areia
+// 4310876	Jacuizinho : Salto do Jacuí
+// 4311239	Lagoa Bonita do Sul : Sobradinho 
+// 4312179	Mato Queimado : Caibaté 
+// 4313466	Novo Xingu : Constantina
+// 4314134	Paulo Bento : Erechim 
+// 4314175	Pedras Altas : Herval e Pinheiro Machado
+// 4314464	Pinhal da Serra : Esmeralda
+// 4314548	Pinto Bandeira : Bento Gonçalves
+// 4315313	Quatro Irmãos : Erechim e Jacutinga
+// 4315958	Rolador : São Luiz Gonzaga
+// 4316733	Santa Cecília do Sul : Tapejara 
+// 4316972	Santa Margarida do Sul : São Gabriel
+// 4318614	São José do Sul : Montenegro, Salvador do Sul e Maratá
+// 4319364	São Pedro das Missões : Palmeira das Missões
+// 4321469	Tio Hugo : Victor Graeff
+// 4323770	Westfalia : Teutônia e Imigrante
+// 5003900	Figueirão : Camapuã e Costa Rica
+// 5006275	Paraíso das Águas : Água Clara, Costa Rica e Chapadão do Sul
+// 5101852	Bom Jesus do Araguaia : Ribeirão Cascalheira e Alto Boa Vista
+// 5103254	Colniza : Aripuanã
+// 5103361	Conquista D'Oeste : Pontes e Lacerda
+// 5103437	Curvelândia : Cáceres, Mirassol d`Oeste e Lambari d`Oeste
+// 5104526	Ipiranga do Norte : Tapurah
+// 5104542	Itanhangá : Tapurah 
+// 5106174	Nova Nazaré : Água Boa
+// 5106190	Nova Santa Helena : Itaúba e Cláudia
+// 5106315	Novo Santo Antônio : São Félix do Araguaia
+// 5107578	Rondolândia : Aripuanã 
+// 5107743	Santa Cruz do Xingu : São José do Xingu
+// 5107768	Santa Rita do Trivelato : Nova Mutum
+// 5107792	Santo Antônio do Leste : Novo São Joaquim
+// 5107883	Serra Nova Dourada : Alto Boa Vista e São Félix do Araguaia
+// 5108352	Vale de São Domingos : Pontes e Lacerda
+// 5204854	Campo Limpo de Goiás : Anápolis 
+// 5208152	Gameleira de Goiás : Silvânia
+// 5210158	Ipiranga de Goiás : Ceres
+// 5212253	Lagoa Santa : Itajá
+
+
 
 save "output\municipalities_panel.dta", replace
 
