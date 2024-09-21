@@ -413,15 +413,16 @@ foreach year in 1997 2003 2004 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015
 	
 	replace previous_mun_`year' = munic_code if d_`year' != .
 	
+	replace previous_mun_`year' = "1506807" if d_`year' == . & munic_code == "1504752" // 1504752	Mojuí dos Campos : Santarém 
+	replace previous_mun_`year' = "2208007" if d_`year' == . & munic_code == "2200954" // 2200954	Aroeiras do Itaim : Picos
+	
+	
 }
 
 *******************************************************
 *TO DO: manually find such municipalities zzzz
 *******************************************************
 
-
-// 1504752	Mojuí dos Campos : Santarém 
-// 2200954	Aroeiras do Itaim : Picos
 // 2206720	Nazária : Teresina 
 // 2207793	Pau D'Arco do Piauí : Altos
 // 2406155	Jundiá : Várzea
