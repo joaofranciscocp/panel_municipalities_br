@@ -141,5 +141,11 @@ foreach year in 1997 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012
 }
 
 
-// Save final panel
+// Save final panel in .dta
 save "output\municipalities_panel.dta", replace
+
+// and .csv (Stata should really include an encoding option for "export". Lesson: use R)
+export delimited using "output\municipalities_panel_pre.csv", replace
+unicode convertfile "output/municipalities_panel_pre.csv" "output/municipalities_panel.csv", dstencoding(latin1) replace
+erase "output\municipalities_panel_pre.csv"
+
