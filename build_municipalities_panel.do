@@ -392,7 +392,6 @@ save "output\municipalities_2022.dta", replace
 
 use "output\municipalities_1997.dta", clear
 
-
 foreach year in 2003 2004 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 {
     merge m:m munic_code using "output\municipalities_`year'.dta"
 	
@@ -401,9 +400,27 @@ foreach year in 2003 2004 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016
 
 duplicates drop
 
-gen d_2005 = 1 if d_2004 == 1
+// d_2005 = 1 iff mun existed in 2006 
+//(municipalities are only created one year after municipal election years; no municipalities ceased to exist in 2006)
+gen d_2005 = d_2006
 order d_2005, after(d_2004)
+
+// d_2002 = 1 IF (not iff) mun existed in 2003 
+// d_2001 = 1 IF (not iff) mun existed in 2002 
+// (municipalities are only created one year after municipal election years)
+gen d_2002 = 1 if d_2003 == 1
+gen d_2001 = 1 if d_2002 == 1
+order d_2001 d_2002, before(d_2003)
+
+// Check:
+// br if d_2001 == . | d_2002 == .
+// Pinto Bandeira (4314548) existed in 2001 and 2002
+
+replace d_2002 = 1 if munic_code == "4314548"
+replace d_2001 = 1 if munic_code == "4314548"
+
 order munic_code, after(uf_code)
+
 
 *****************************************************************************
 *TO DO: decide what happens if more than one mother municipality
