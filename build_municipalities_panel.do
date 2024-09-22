@@ -2,7 +2,7 @@
 * ACTION: BUILD PANEL OF EXISTENT MUNICIPALITIES PER YEAR
 
 * CREATED: 20/09/2024
-* LAST UPDATED: 20/09/2024
+* LAST UPDATED: 22/09/2024
 *-------------------------------------------------------------------------------
 
 clear all
@@ -422,15 +422,15 @@ replace d_2001 = 1 if munic_code == "4314548"
 order munic_code, after(uf_code)
 
 
-*****************************************************************************
-*TO DO: decide what happens if more than one mother municipality
-*****************************************************************************
 
+// If a municipality did not exist in year t,
+// create previous_mun_t which says to which other municipality it belonged in that year.
+// Information collected by hand on Google (municipality creation laws).
+// If there is more than one mother municipality, I assign previous_mun_t to the one
+// from which the largest part of the population was taken, comparing population before and after new mun's creation.
+// I take this information from IBGE's population estimate (https://github.com/femdias/Pop_municipal)
 
-//If a municipality did not exist in year t,
-//find to which other municipality it belonged
-
-foreach year in 1997 2003 2004 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 {
+foreach year in 1997 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 {
 	gen previous_mun_`year' = ""
 	
 	replace previous_mun_`year' = munic_code if d_`year' != .
@@ -440,7 +440,7 @@ foreach year in 1997 2003 2004 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015
 	replace previous_mun_`year' = "2211001" if d_`year' == . & munic_code == "2206720" // 2206720	Nazária : Teresina 
 	replace previous_mun_`year' = "2211001" if d_`year' == . & munic_code == "2207793" // 2207793	Pau D'Arco do Piauí : Altos
 	replace previous_mun_`year' = "2414704" if d_`year' == . & munic_code == "2406155" // 2406155	Jundiá : Várzea
-	replace previous_mun_`year' = "" if d_`year' == . & munic_code == "2703759" // 2703759	Jequiá da Praia : São Miguel dos Campos e Coruripe
+	replace previous_mun_`year' = "2708600" if d_`year' == . & munic_code == "2703759" // 2703759	Jequiá da Praia : São Miguel dos Campos e Coruripe
 	replace previous_mun_`year' = "2413508" if d_`year' == . & munic_code == "2903276" // 2903276	Barrocas : Serrinha
 	replace previous_mun_`year' = "2903201" if d_`year' == . & munic_code == "2919553" // 2919553	Luís Eduardo Magalhães : Barreiras
 	replace previous_mun_`year' = "3201506" if d_`year' == . & munic_code == "3202256" // 3202256	Governador Lindenberg : Colatina 
@@ -450,13 +450,13 @@ foreach year in 1997 2003 2004 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015
 	replace previous_mun_`year' = "4301602" if d_`year' == . & munic_code == "4300034" // 4300034	Aceguá : Bagé 
 	replace previous_mun_`year' = "4304705" if d_`year' == . & munic_code == "4300471" // 4300471	Almirante Tamandaré do Sul : Carazinho 
 	replace previous_mun_`year' = "4314407" if d_`year' == . & munic_code == "4301073" // 4301073	Arroio do Padre : Pelotas
-	replace previous_mun_`year' = "" if d_`year' == . & munic_code == "4302220" // 4302220	Boa Vista do Cadeado : Cruz Alta, Ijuí e Augusto Pestana
+	replace previous_mun_`year' = "4306106" if d_`year' == . & munic_code == "4302220" // 4302220	Boa Vista do Cadeado : Cruz Alta, Ijuí e Augusto Pestana
 	replace previous_mun_`year' = "4306106" if d_`year' == . & munic_code == "4302238" // 4302238	Boa Vista do Incra : Cruz Alta
 	replace previous_mun_`year' = "4310207" if d_`year' == . & munic_code == "4302584" // 4302584	Bozano : Ijuí 
 	replace previous_mun_`year' = "4311403" if d_`year' == . & munic_code == "4304614" // 4304614	Canudos do Vale : Lajeado
 	replace previous_mun_`year' = "4311304" if d_`year' == . & munic_code == "4304622" // 4304622	Capão Bonito do Sul : Lagoa Vermelha
 	replace previous_mun_`year' = "4317400" if d_`year' == . & munic_code == "4304655" // 4304655	Capão do Cipó : Santiago
-	replace previous_mun_`year' = "" if d_`year' == . & munic_code == "4305835" // 4305835	Coqueiro Baixo : Nova Bréscia e Relvado
+	replace previous_mun_`year' = "4313003" if d_`year' == . & munic_code == "4305835" // 4305835	Coqueiro Baixo : Nova Bréscia e Relvado
 	replace previous_mun_`year' = "4308607" if d_`year' == . & munic_code == "4305934" // 4305934	Coronel Pilar : Garibaldi 
 	replace previous_mun_`year' = "4303806" if d_`year' == . & munic_code == "4306130" // 4306130	Cruzaltense : Campinas do Sul
 	replace previous_mun_`year' = "4311403" if d_`year' == . & munic_code == "4308433" // 4308433	Forquetinha : Lajeado
@@ -466,105 +466,39 @@ foreach year in 1997 2003 2004 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015
 	replace previous_mun_`year' = "4303301" if d_`year' == . & munic_code == "4312179" // 4312179	Mato Queimado : Caibaté 
 	replace previous_mun_`year' = "4305801" if d_`year' == . & munic_code == "4313466" // 4313466	Novo Xingu : Constantina
 	replace previous_mun_`year' = "4307005" if d_`year' == . & munic_code == "4314134" // 4314134	Paulo Bento : Erechim 
-	replace previous_mun_`year' = "" if d_`year' == . & munic_code == "4314175" // 4314175	Pedras Altas : Herval e Pinheiro Machado
+	replace previous_mun_`year' = "4307104" if d_`year' == . & munic_code == "4314175" // 4314175	Pedras Altas : Herval e Pinheiro Machado
 	replace previous_mun_`year' = "4307401" if d_`year' == . & munic_code == "4314464" // 4314464	Pinhal da Serra : Esmeralda
 	replace previous_mun_`year' = "4302105" if d_`year' == . & munic_code == "4314548" // 4314548	Pinto Bandeira : Bento Gonçalves
-	replace previous_mun_`year' = "" if d_`year' == . & munic_code == "4315313" // 4315313	Quatro Irmãos : Erechim e Jacutinga
+	replace previous_mun_`year' = "4307005" if d_`year' == . & munic_code == "4315313" // 4315313	Quatro Irmãos : Erechim e Jacutinga
 	replace previous_mun_`year' = "4318903" if d_`year' == . & munic_code == "4315958" // 4315958	Rolador : São Luiz Gonzaga
 	replace previous_mun_`year' = "4320909" if d_`year' == . & munic_code == "4316733" // 4316733	Santa Cecília do Sul : Tapejara 
 	replace previous_mun_`year' = "4318309" if d_`year' == . & munic_code == "4316972" // 4316972	Santa Margarida do Sul : São Gabriel
-	replace previous_mun_`year' = "" if d_`year' == . & munic_code == "4318614" // 4318614	São José do Sul : Montenegro, Salvador do Sul e Maratá
+	replace previous_mun_`year' = "4316501" if d_`year' == . & munic_code == "4318614" // 4318614	São José do Sul : Montenegro, Salvador do Sul e Maratá
 	replace previous_mun_`year' = "4313706" if d_`year' == . & munic_code == "4319364" // 4319364	São Pedro das Missões : Palmeira das Missões
 	replace previous_mun_`year' = "4323200" if d_`year' == . & munic_code == "4321469" // 4321469	Tio Hugo : Victor Graeff
-	replace previous_mun_`year' = "" if d_`year' == . & munic_code == "4323770" // 4323770	Westfalia : Teutônia e Imigrante
-	replace previous_mun_`year' = "" if d_`year' == . & munic_code == "5003900" // 5003900	Figueirão : Camapuã e Costa Rica
-	replace previous_mun_`year' = "" if d_`year' == . & munic_code == "5006275" // 5006275	Paraíso das Águas : Água Clara, Costa Rica e Chapadão do Sul
-	replace previous_mun_`year' = "" if d_`year' == . & munic_code == "5101852" // 5101852	Bom Jesus do Araguaia : Ribeirão Cascalheira e Alto Boa Vista
+	replace previous_mun_`year' = "4321451" if d_`year' == . & munic_code == "4323770" // 4323770	Westfalia : Teutônia e Imigrante
+	replace previous_mun_`year' = "5002605" if d_`year' == . & munic_code == "5003900" // 5003900	Figueirão : Camapuã e Costa Rica
+	replace previous_mun_`year' = "5003256" if d_`year' == . & munic_code == "5006275" // 5006275	Paraíso das Águas : Água Clara, Costa Rica e Chapadão do Sul
+	replace previous_mun_`year' = "5100359" if d_`year' == . & munic_code == "5101852" // 5101852	Bom Jesus do Araguaia : Ribeirão Cascalheira e Alto Boa Vista
 	replace previous_mun_`year' = "5101407" if d_`year' == . & munic_code == "5103254" // 5103254	Colniza : Aripuanã
 	replace previous_mun_`year' = "5106752" if d_`year' == . & munic_code == "5103361" // 5103361	Conquista D'Oeste : Pontes e Lacerda
 	replace previous_mun_`year' = "5108006" if d_`year' == . & munic_code == "5103437" // 5103437	Curvelândia : Cáceres, Mirassol d`Oeste e Lambari d`Oeste
 	replace previous_mun_`year' = "5108006" if d_`year' == . & munic_code == "5104526" // 5104526	Ipiranga do Norte : Tapurah
 	replace previous_mun_`year' = "5108006" if d_`year' == . & munic_code == "5104542" // 5104542	Itanhangá : Tapurah 
 	replace previous_mun_`year' = "5100201" if d_`year' == . & munic_code == "5106174" // 5106174	Nova Nazaré : Água Boa
-	replace previous_mun_`year' = "" if d_`year' == . & munic_code == "5106190" // 5106190	Nova Santa Helena : Itaúba e Cláudia
+	replace previous_mun_`year' = "5104559" if d_`year' == . & munic_code == "5106190" // 5106190	Nova Santa Helena : Itaúba e Cláudia
 	replace previous_mun_`year' = "5107859" if d_`year' == . & munic_code == "5106315" // 5106315	Novo Santo Antônio : São Félix do Araguaia
 	replace previous_mun_`year' = "5101407" if d_`year' == . & munic_code == "5107578" // 5107578	Rondolândia : Aripuanã 
 	replace previous_mun_`year' = "5107354" if d_`year' == . & munic_code == "5107743" // 5107743	Santa Cruz do Xingu : São José do Xingu
 	replace previous_mun_`year' = "5106224" if d_`year' == . & munic_code == "5107768" // 5107768	Santa Rita do Trivelato : Nova Mutum
 	replace previous_mun_`year' = "5106281" if d_`year' == . & munic_code == "5107792" // 5107792	Santo Antônio do Leste : Novo São Joaquim
-	replace previous_mun_`year' = "" if d_`year' == . & munic_code == "5107883" // 5107883	Serra Nova Dourada : Alto Boa Vista e São Félix do Araguaia
+	replace previous_mun_`year' = "5100359" if d_`year' == . & munic_code == "5107883" // 5107883	Serra Nova Dourada : Alto Boa Vista e São Félix do Araguaia
 	replace previous_mun_`year' = "5106752" if d_`year' == . & munic_code == "5108352" // 5108352	Vale de São Domingos : Pontes e Lacerda
 	replace previous_mun_`year' = "5201108" if d_`year' == . & munic_code == "5204854" // 5204854	Campo Limpo de Goiás : Anápolis 
 	replace previous_mun_`year' = "5220603" if d_`year' == . & munic_code == "5208152" // 5208152	Gameleira de Goiás : Silvânia
 	replace previous_mun_`year' = "5205406" if d_`year' == . & munic_code == "5210158" // 5210158	Ipiranga de Goiás : Ceres
 	replace previous_mun_`year' = "5210802" if d_`year' == . & munic_code == "5212253" // 5212253	Lagoa Santa : Itajá
 }
-
-
-
-// 2206720	Nazária : Teresina 
-// 2207793	Pau D'Arco do Piauí : Altos
-// 2406155	Jundiá : Várzea
-// 2703759	Jequiá da Praia : São Miguel dos Campos e Coruripe
-// 2903276	Barrocas : Serrinha
-// 2919553	Luís Eduardo Magalhães : Barreiras
-// 3202256	Governador Lindenberg : Colatina 
-// 3302858	Mesquita : Nova Iguaçu
-// 4212650	Pescaria Brava : Laguna
-// 4220000	Balneário Rincão : Içara
-// 4300034	Aceguá : Bagé 
-// 4300471	Almirante Tamandaré do Sul : Carazinho 
-// 4301073	Arroio do Padre : Pelotas
-// 4302220	Boa Vista do Cadeado : Cruz Alta, Ijuí e Augusto Pestana
-// 4302238	Boa Vista do Incra : Cruz Alta
-// 4302584	Bozano : Ijuí 
-// 4304614	Canudos do Vale : Lajeado
-// 4304622	Capão Bonito do Sul : Lagoa Vermelha
-// 4304655	Capão do Cipó : Santiago
-// 4305835	Coqueiro Baixo : Nova Bréscia e Relvado
-// 4305934	Coronel Pilar : Garibaldi 
-// 4306130	Cruzaltense : Campinas do Sul
-// 4308433	Forquetinha : Lajeado
-// 4310652	Itati : Terra de Areia
-// 4310876	Jacuizinho : Salto do Jacuí
-// 4311239	Lagoa Bonita do Sul : Sobradinho 
-// 4312179	Mato Queimado : Caibaté 
-// 4313466	Novo Xingu : Constantina
-// 4314134	Paulo Bento : Erechim 
-// 4314175	Pedras Altas : Herval e Pinheiro Machado
-// 4314464	Pinhal da Serra : Esmeralda
-// 4314548	Pinto Bandeira : Bento Gonçalves
-// 4315313	Quatro Irmãos : Erechim e Jacutinga
-// 4315958	Rolador : São Luiz Gonzaga
-// 4316733	Santa Cecília do Sul : Tapejara 
-// 4316972	Santa Margarida do Sul : São Gabriel
-// 4318614	São José do Sul : Montenegro, Salvador do Sul e Maratá
-// 4319364	São Pedro das Missões : Palmeira das Missões
-// 4321469	Tio Hugo : Victor Graeff
-// 4323770	Westfalia : Teutônia e Imigrante
-// 5003900	Figueirão : Camapuã e Costa Rica
-// 5006275	Paraíso das Águas : Água Clara, Costa Rica e Chapadão do Sul
-// 5101852	Bom Jesus do Araguaia : Ribeirão Cascalheira e Alto Boa Vista
-// 5103254	Colniza : Aripuanã
-// 5103361	Conquista D'Oeste : Pontes e Lacerda
-// 5103437	Curvelândia : Cáceres, Mirassol d`Oeste e Lambari d`Oeste
-// 5104526	Ipiranga do Norte : Tapurah
-// 5104542	Itanhangá : Tapurah 
-// 5106174	Nova Nazaré : Água Boa
-// 5106190	Nova Santa Helena : Itaúba e Cláudia
-// 5106315	Novo Santo Antônio : São Félix do Araguaia
-// 5107578	Rondolândia : Aripuanã 
-// 5107743	Santa Cruz do Xingu : São José do Xingu
-// 5107768	Santa Rita do Trivelato : Nova Mutum
-// 5107792	Santo Antônio do Leste : Novo São Joaquim
-// 5107883	Serra Nova Dourada : Alto Boa Vista e São Félix do Araguaia
-// 5108352	Vale de São Domingos : Pontes e Lacerda
-// 5204854	Campo Limpo de Goiás : Anápolis 
-// 5208152	Gameleira de Goiás : Silvânia
-// 5210158	Ipiranga de Goiás : Ceres
-// 5212253	Lagoa Santa : Itajá
-
-
 
 save "output\municipalities_panel.dta", replace
 
