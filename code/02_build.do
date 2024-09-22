@@ -141,6 +141,41 @@ foreach year in 1997 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012
 }
 
 
+// Create UF abbreviation variable
+
+gen uf_abb = ""
+
+replace uf_abb = "RO" if uf_code == "11"
+replace uf_abb = "AC" if uf_code == "12"
+replace uf_abb = "AM" if uf_code == "13"
+replace uf_abb = "RR" if uf_code == "14"
+replace uf_abb = "PA" if uf_code == "15"
+replace uf_abb = "AP" if uf_code == "16"
+replace uf_abb = "TO" if uf_code == "17"
+replace uf_abb = "MA" if uf_code == "21"
+replace uf_abb = "PI" if uf_code == "22"
+replace uf_abb = "CE" if uf_code == "23"
+replace uf_abb = "RN" if uf_code == "24"
+replace uf_abb = "PB" if uf_code == "25"
+replace uf_abb = "PE" if uf_code == "26"
+replace uf_abb = "AL" if uf_code == "27"
+replace uf_abb = "SE" if uf_code == "28"
+replace uf_abb = "BA" if uf_code == "29"
+replace uf_abb = "MG" if uf_code == "31"
+replace uf_abb = "ES" if uf_code == "32"
+replace uf_abb = "RJ" if uf_code == "33"
+replace uf_abb = "SP" if uf_code == "35"
+replace uf_abb = "PR" if uf_code == "41"
+replace uf_abb = "SC" if uf_code == "42"
+replace uf_abb = "RS" if uf_code == "43"
+replace uf_abb = "MS" if uf_code == "50"
+replace uf_abb = "MT" if uf_code == "51"
+replace uf_abb = "GO" if uf_code == "52"
+replace uf_abb = "DF" if uf_code == "53"
+
+order uf_abb, before(uf_code)
+
+
 // Save final panel in .dta
 save "output\municipalities_panel.dta", replace
 
