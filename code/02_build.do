@@ -28,8 +28,6 @@ foreach year in 2003 2004 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016
 	drop _merge
 }
 
-duplicates drop
-
 // d_2005 = 1 iff mun existed in 2006 
 //(municipalities are only created one year after municipal election years; no municipalities ceased to exist in 2006)
 gen d_2005 = d_2006
@@ -49,6 +47,15 @@ order d_2001 d_2002, before(d_2003)
 replace d_2002 = 1 if munic_code == "4314548"
 replace d_2001 = 1 if munic_code == "4314548"
 
+// To the best of my knowledge,
+// no municipalities were created or ceased to exist between 1998 and 2000
+
+gen d_1998 = d_1997
+gen d_1999 = d_1998
+gen d_2000 = d_1999
+
+order d_1998 d_1999 d_2000, after(d_1997)
+
 order munic_code, after(uf_code)
 
 
@@ -60,7 +67,7 @@ order munic_code, after(uf_code)
 // from which the largest part of the population was taken, comparing population before and after new mun's creation.
 // I take this information from IBGE's population estimate (https://github.com/femdias/Pop_municipal)
 
-foreach year in 1997 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 {
+forvalues year = 1997/2022 {
 	gen previous_mun_`year' = ""
 	
 	replace previous_mun_`year' = munic_code if d_`year' != .
