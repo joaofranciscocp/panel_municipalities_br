@@ -15,17 +15,7 @@ set scheme burd, permanently
 * SET PATH AND LOCALS
 *-------------------------------------------------------------------------------
 
-if c(username)=="sotero"				global dropbox "/Users/sotero/Dropbox/Research/Brazil"
-if c(username)=="claire.montialoux"		global dropbox "C:/Users/claire.montialoux/Dropbox"
-if c(username)=="rober"					global dropbox "C:\Users\rober\Dropbox"
-if c(username)=="arthu"					global dropbox "C:\Users\arthu\Dropbox"
-if c(username)=="joaofrancisco"         global dropbox "C:\Users\joaofrancisco\Dropbox"
-
-global data			"$dropbox/brazil_education/01_data"
-global out			"$dropbox/brazil_education/04_out"
-*global data "C:\Users\joao.perez\Downloads\brazil_education\01_data"
-
-cd "C:\Users\joaofrancisco\Desktop\USP\Economia\FUNDEF project\Municipalities\panel_municipalities_br"
+//cd "(...)\panel_municipalities_br"
 
 *-------------------------------------------------------------------------------
 * IMPORT DATA
